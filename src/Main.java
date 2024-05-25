@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Main {
@@ -14,9 +15,16 @@ public class Main {
 
         // Collect 5 numbers from user
         System.out.println("Enter five numbers:");
+
         for (int i = 0; i < 5; i++) {
-            int num = sc.nextInt();
-            numList.add(num);
+            try {
+                int num = sc.nextInt();
+                numList.add(num);
+            } catch (InputMismatchException e) {
+                System.out.println("Please enter numbers only. Try again.");
+                sc.next(); // Consume the invalid input
+                i--; // Decrement i to re-prompt for the same index
+            }
         }
 
         // Calling sort method to sort the list
